@@ -1,0 +1,125 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Moon, Sun, Github, Mail } from "lucide-react";
+
+export default function Portfolio() {
+  const [dark, setDark] = useState(true);
+
+  return (
+    <div className={dark ? "dark" : ""}>
+      <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+        {/* Navbar */}
+        <div className="flex justify-between items-center p-6 max-w-6xl mx-auto">
+          <h1 className="text-xl font-semibold">June LauYH</h1>
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon" onClick={() => setDark(!dark)}>
+              {dark ? <Sun size={18} /> : <Moon size={18} />}
+            </Button>
+            <a href="#contact"><Mail size={18} /></a>
+            <a href="https://github.com/june0612-beep" target="_blank"><Github size={18} /></a>
+          </div>
+        </div>
+
+        {/* Hero Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center py-20 px-4"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            Data Analyst • Data Engineer • Data Analytics Engineer
+          </h2>
+          <p className="text-lg max-w-2xl mx-auto text-gray-600 dark:text-gray-400">
+            Aspiring data professional building analytical dashboards, data pipelines,
+            and clean reporting systems using SQL, Python, and BI tools.
+          </p>
+        </motion.section>
+
+        {/* Skills Section */}
+        <section className="max-w-6xl mx-auto px-6 py-16">
+          <h3 className="text-3xl font-semibold mb-10 text-center">Technical Skills</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Data Analyst",
+                skills: "SQL, Excel, Tableau, Power BI, Python (Pandas, Matplotlib)"
+              },
+              {
+                title: "Data Engineer",
+                skills: "ETL Concepts, Data Cleaning, Relational Databases, Git, APIs"
+              },
+              {
+                title: "Analytics Engineer",
+                skills: "Data Modeling, KPI Reporting, Dashboard Automation"
+              }
+            ].map((role, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 200 }}
+              >
+                <Card className="rounded-2xl shadow-lg">
+                  <CardContent className="p-6">
+                    <h4 className="text-xl font-semibold mb-3">{role.title}</h4>
+                    <p className="text-gray-600 dark:text-gray-400">{role.skills}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section className="bg-gray-100 dark:bg-gray-900 py-16 px-6">
+          <div className="max-w-6xl mx-auto">
+            <h3 className="text-3xl font-semibold mb-10 text-center">Practice Projects</h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                {
+                  title: "Sales Analytics Dashboard",
+                  desc: "Built interactive Tableau dashboard analyzing regional revenue and trends."
+                },
+                {
+                  title: "Python Data Cleaning Project",
+                  desc: "Processed messy CSV datasets, handled missing values, and automated reporting."
+                }
+              ].map((project, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ y: -8 }}
+                  transition={{ type: "spring", stiffness: 150 }}
+                >
+                  <Card className="rounded-2xl shadow-md">
+                    <CardContent className="p-6">
+                      <h4 className="text-xl font-semibold mb-3">{project.title}</h4>
+                      <p className="text-gray-600 dark:text-gray-400">{project.desc}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="text-center py-20 px-6">
+          <h3 className="text-3xl font-semibold mb-6">Let’s Connect</h3>
+          <p className="mb-6 text-gray-600 dark:text-gray-400">
+            Open to Data Analyst, Data Engineer, and Analytics roles.
+          </p>
+          <Button className="rounded-2xl px-8 py-6 text-lg">
+            Contact Me
+          </Button>
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
+          © 2026 June LauYH • Built with React & Tailwind
+        </footer>
+      </div>
+    </div>
+  );
+}
